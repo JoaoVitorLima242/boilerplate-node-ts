@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
+import mongoose from 'mongoose'
 
 import IndexRoute from '../routes/index.routes'
 
@@ -21,7 +22,21 @@ class App {
     dotenv.config()
   }
 
-  private database() {}
+  private database() {
+    const uri = process.env.MONGO_URI!
+
+    mongoose.connect(
+      uri,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+      },
+      () => {
+        console.log('Banco esta ON')
+      },
+    )
+  }
 
   private routes() {
     this.express.use('/', IndexRoute)
