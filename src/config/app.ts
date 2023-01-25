@@ -3,6 +3,7 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 
 import IndexRoute from '../routes/index.routes'
+import { config } from './vars'
 
 class App {
   public express: express.Application
@@ -21,7 +22,7 @@ class App {
   }
 
   private database() {
-    const uri = process.env.MONGO_URI!
+    const uri = config.MONGO_URI
 
     mongoose.connect(
       uri,
@@ -31,7 +32,7 @@ class App {
         useFindAndModify: false,
       },
       () => {
-        console.log('Banco esta ON')
+        console.log('Mongo DB is ON!')
       },
     )
   }
