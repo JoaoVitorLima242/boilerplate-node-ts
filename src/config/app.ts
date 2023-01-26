@@ -2,7 +2,8 @@ import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
-import IndexRoute from '../routes/index.routes'
+import IndexRoutes from '../routes/index.routes'
+import ImagesRoutes from '../routes/images.routes'
 import { config } from './vars'
 
 class App {
@@ -38,7 +39,8 @@ class App {
   }
 
   private routes() {
-    this.express.use('/', IndexRoute)
+    this.express.use('/', IndexRoutes)
+    this.express.use('/images', ImagesRoutes)
   }
 }
 
